@@ -1,0 +1,24 @@
+version: '2'
+services:
+  node:
+    build: ./nodejs
+    #environment:
+     # port: 8081 
+    ports:
+      - "8080:8080"
+    links:
+      - mongodb
+  mosquitto:
+    build: ./mosquitto
+    ports:
+      - "1883:1883"
+      - "9001:9001" 
+  mongodb:
+    image: mongo
+    ports:
+      - "27017:27017"
+    expose:
+      - 27017
+  #  volumes:
+   #   - /srv/docker/mongodb:/var/lib/mongodb
+    restart: always
